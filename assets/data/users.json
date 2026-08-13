@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "name": "Dr. Adam Naser",
+    "role": "doctor",
+    "email": "adam@hospital.com",
+    "phone": "0598001001"
+  },
+  {
+    "id": "2",
+    "name": "Lina Saleh",
+    "role": "nurse",
+    "email": "lina@hospital.com",
+    "phone": "0598001002"
+  },
+  {
+    "id": "3",
+    "name": "Omar Khalil",
+    "role": "receptionist",
+    "email": "omar@hospital.com",
+    "phone": "0598001003"
+  }
+]

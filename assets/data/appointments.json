@@ -1,0 +1,92 @@
+[
+  {
+    "id": "1",
+    "patientId": "1",
+    "doctorId": "1",
+    "date": "2026-08-13",
+    "time": "09:00",
+    "status": "Scheduled",
+    "reason": "Routine cardiac follow-up"
+  },
+  {
+    "id": "2",
+    "patientId": "2",
+    "doctorId": "1",
+    "date": "2026-08-13",
+    "time": "10:30",
+    "status": "Scheduled",
+    "reason": "Arrhythmia follow-up"
+  },
+  {
+    "id": "3",
+    "patientId": "3",
+    "doctorId": "1",
+    "date": "2026-08-13",
+    "time": "12:00",
+    "status": "Urgent",
+    "reason": "Chest pain assessment"
+  },
+  {
+    "id": "4",
+    "patientId": "4",
+    "doctorId": "1",
+    "date": "2026-08-14",
+    "time": "09:30",
+    "status": "Scheduled",
+    "reason": "Blood pressure review"
+  },
+  {
+    "id": "5",
+    "patientId": "5",
+    "doctorId": "1",
+    "date": "2026-08-14",
+    "time": "11:00",
+    "status": "Scheduled",
+    "reason": "Heart rhythm check"
+  },
+  {
+    "id": "6",
+    "patientId": "7",
+    "doctorId": "1",
+    "date": "2026-08-14",
+    "time": "13:00",
+    "status": "Urgent",
+    "reason": "Heart failure follow-up"
+  },
+  {
+    "id": "7",
+    "patientId": "8",
+    "doctorId": "1",
+    "date": "2026-08-15",
+    "time": "10:00",
+    "status": "Scheduled",
+    "reason": "Routine heart check"
+  },
+  {
+    "id": "8",
+    "patientId": "9",
+    "doctorId": "1",
+    "date": "2026-08-15",
+    "time": "11:30",
+    "status": "Scheduled",
+    "reason": "Coronary disease follow-up"
+  },
+  {
+    "id": "9",
+    "patientId": "10",
+    "doctorId": "1",
+    "date": "2026-08-16",
+    "time": "09:00",
+    "status": "Scheduled",
+    "reason": "Blood pressure follow-up"
+  },
+  {
+    "id": "10",
+    "patientId": "6",
+    "doctorId": "1",
+    "date": "2026-08-16",
+    "time": "12:30",
+    "status": "Completed",
+    "reason": "Routine cardiac check"
+  }
+]
