@@ -1,21 +1,19 @@
-const modebtn = document.querySelector(".mode-toggle");
-const modeicon = document.querySelector(".mode-icon");
-const html = document.documentElement;
+import { renderHeader } from "../features/header.js";
+import { initRoleSelect } from "../features/roleSelect.js";
+import { renderSidebar } from "../features/sideBar.js";
+import { bindThemeToggle, initTheme } from "./theme.js";
 
-//dark mode
-if (localStorage.getItem("theme") ==="dark") {
-  html.classList.add("dark");
-  modeicon.classList.replace("fa-moon", "fa-sun");
+const page = document.body.dataset.page;
+
+initTheme();
+
+if (page === "role-select") {
+  bindThemeToggle();
+  initRoleSelect();
 }
 
-modebtn.addEventListener("click", () => {
-  html.classList.toggle("dark");
-
-  if (html.classList.contains("dark")) {
-    localStorage.setItem("theme", "dark");
-    modeicon.classList.replace("fa-moon", "fa-sun");
-  } else {
-    localStorage.setItem("theme", "light");
-    modeicon.classList.replace("fa-sun", "fa-moon");
-  }
-});
+if (page === "dashboard") {
+  bindThemeToggle();
+  renderHeader();
+  renderSidebar()
+}

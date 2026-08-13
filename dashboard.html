@@ -1,11 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>CardioPulse | Cardiac Patient Monitoring Portal</title>
+  <meta name="description"
+    content="A demo cardiac patient monitoring platform. Choose a role — Doctor, Nurse, or Receptionist — to explore a simulated clinical dashboard experience." />
+  <link rel="shortcut icon" href="./assets/icon.ico" type="image/x-icon">
+
+  <meta property="og:title" content="CardioPulse | Cardiac Patient Monitoring Portal" />
+  <meta property="og:description"
+    content="A demo cardiac patient monitoring platform. Choose a role — Doctor, Nurse, or Receptionist — to explore a simulated clinical dashboard experience." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourproject.example.com/" />
+  <meta property="og:image" content="https://yourproject.example.com/assets/og/og-home.png" />
+  <meta property="og:site_name" content="CardioPulse" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css"
+    integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="./src/css/output.css">
+
 </head>
-<body>
-  
+
+<body data-page="dashboard"
+  class="min-h-screen font-sans bg-gradient-wash text-text-primary dark:bg-gradient-wash-dark dark:text-text-primary-dark transition-all duration-100 ease-in-out">
+
+
+  <header class="w-full border-b border-border dark:border-border-dark">
+    <div class="container mx-auto py-3 px-4 md:px-6 flex justify-between">
+      <div class="flex gap-3 items-center">
+        <button
+          class="menuBtn md:hidden w-10 h-10 flex justify-center items-center hover:bg-primary/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor"
+              d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h16q.425 0 .713.288T21 17t-.288.713T20 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z" />
+          </svg>
+        </button>
+        <p class="text-lg font-semibold">CardioPulse</p>
+      </div>
+
+      <div class="flex gap-2">
+        <button
+          class="mode-toggle w-10 h-10 flex justify-center items-center hover:bg-primary/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">
+          <i class="fa-regular fa-moon mode-icon text-xl"></i>
+        </button>
+
+        <button
+          class="notificationBtn w-10 h-10 flex justify-center items-center hover:bg-primary/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10.268 21a2 2 0 0 0 3.464 0m-10.47-5.674A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
+          </svg>
+        </button>
+
+        <span class="roleProfile w-10 h-10 rounded-full text-sm text-white flex justify-center items-center"></span>
+
+        <button
+          class="logoutBtn w-10 h-10 flex justify-center items-center hover:bg-primary/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g fill="currentColor">
+              <path
+                d="M5.911 3.038C6.361 3 6.943 3 7.8 3H11a1 1 0 1 0 0-2H7.759c-.805 0-1.47 0-2.01.044c-.563.046-1.08.145-1.565.392a4 4 0 0 0-1.748 1.748c-.247.485-.346 1.002-.392 1.564C2 5.29 2 5.954 2 6.758v10.483c0 .805 0 1.47.044 2.01c.046.563.145 1.08.392 1.565a4 4 0 0 0 1.748 1.748c.485.247 1.002.346 1.564.392C6.29 23 6.954 23 7.758 23H11a1 1 0 1 0 0-2H7.8c-.857 0-1.439 0-1.889-.038c-.438-.035-.663-.1-.819-.18a2 2 0 0 1-.874-.874c-.08-.156-.145-.38-.18-.819C4 18.639 4 18.057 4 17.2V6.8c0-.857 0-1.439.038-1.889c.035-.438.1-.663.18-.819a2 2 0 0 1 .874-.874c.156-.08.38-.145.819-.18" />
+              <path
+                d="M15.293 6.293a1 1 0 0 1 1.414 0l5 5a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414-1.414L18.586 13H10a1 1 0 1 1 0-2h8.586l-3.293-3.293a1 1 0 0 1 0-1.414" />
+            </g>
+          </svg>
+
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <aside
+    class="flex flex-col gap-8 items-center w-24 min-h-screen bg-surface dark:bg-surface-dark border-r border-border dark:border-border-dark p-4">
+    <div class="flex justify-center items-center w-fit h-fit bg-primary dark:bg-primary-light p-1 rounded-lg ">
+      <svg xmlns="http://www.w3.org/2000/svg" class="text-text-primary-dark dark:text-text-primary" width="32"
+        height="32" viewBox="0 0 512 512">
+        <path fill="currentColor"
+          d="M432 272a48.09 48.09 0 0 0-45.25 32h-39.22l-28.35-85.06a16 16 0 0 0-30.56.66l-44.51 155.76l-52.33-314a16 16 0 0 0-31.3-1.25L99.51 304H48a16 16 0 0 0 0 32h64a16 16 0 0 0 15.52-12.12l45.34-181.37l51.36 308.12A16 16 0 0 0 239.1 464h.91a16 16 0 0 0 15.37-11.6l49.8-174.28l15.64 46.94A16 16 0 0 0 336 336h50.75A48 48 0 1 0 432 272" />
+      </svg>
+    </div>
+    <nav class="sidebarNav flex flex-col  gap-4">
+      
+    </nav>
+
+  </aside>
+
+
+
+  <script type="module" src="./src/js/app.js"></script>
 </body>
+
 </html>

@@ -5,15 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CardioPulse | Cardiac Patient Monitoring Portal</title>
-<meta name="description" content="A demo cardiac patient monitoring platform. Choose a role — Doctor, Nurse, or Receptionist — to explore a simulated clinical dashboard experience." />
-<link rel="shortcut icon" href="./assets/icon.ico" type="image/x-icon">
+  <meta name="description"
+    content="A demo cardiac patient monitoring platform. Choose a role — Doctor, Nurse, or Receptionist — to explore a simulated clinical dashboard experience." />
+  <link rel="shortcut icon" href="./assets/icon.ico" type="image/x-icon">
 
-<meta property="og:title" content="CardioPulse | Cardiac Patient Monitoring Portal" />
-<meta property="og:description" content="A demo cardiac patient monitoring platform. Choose a role — Doctor, Nurse, or Receptionist — to explore a simulated clinical dashboard experience." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://yourproject.example.com/" />
-<meta property="og:image" content="https://yourproject.example.com/assets/og/og-home.png" />
-<meta property="og:site_name" content="CardioPulse" />
+  <meta property="og:title" content="CardioPulse | Cardiac Patient Monitoring Portal" />
+  <meta property="og:description"
+    content="A demo cardiac patient monitoring platform. Choose a role — Doctor, Nurse, or Receptionist — to explore a simulated clinical dashboard experience." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourproject.example.com/" />
+  <meta property="og:image" content="https://yourproject.example.com/assets/og/og-home.png" />
+  <meta property="og:site_name" content="CardioPulse" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css"
     integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA=="
@@ -23,7 +25,7 @@
 
 </head>
 
-<body
+<body data-page = 'role-select'
   class="min-h-screen font-sans bg-gradient-wash text-text-primary dark:bg-gradient-wash-dark dark:text-text-primary-dark transition-all duration-100 ease-in-out">
 
 
@@ -99,8 +101,8 @@
         </div>
 
         <div class="flex flex-col gap-3">
-          <a href="./dashboard.html"
-            class="bg-surface dark:bg-surface-dark p-5 flex justify-between items-center border border-border dark:border-border-dark hover:-translate-y-1 transition-all duration-200 ease-in-out">
+          <a href="./dashboard.html" data-role="doctor"
+            class="roleCard bg-surface dark:bg-surface-dark p-5 flex justify-between items-center border border-border dark:border-border-dark hover:-translate-y-1 transition-all duration-200 ease-in-out">
             <div class=" flex gap-3 items-center">
               <div
                 class="w-14 h-14 flex justify-center items-center rounded-full text-role-doctor bg-role-doctor-bg dark:text-role-doctor-dark dark:bg-role-doctor/20">
@@ -124,8 +126,8 @@
             </div>
           </a>
 
-          <a href="./dashboard.html"
-            class="bg-surface dark:bg-surface-dark p-5 flex justify-between items-center border border-border dark:border-border-dark hover:-translate-y-1 transition-all duration-200 ease-in-out">
+          <a href="./dashboard.html" data-role="nurse"
+            class="roleCard bg-surface dark:bg-surface-dark p-5 flex justify-between items-center border border-border dark:border-border-dark hover:-translate-y-1 transition-all duration-200 ease-in-out">
             <div class=" flex gap-3 items-center">
               <div
                 class="w-14 h-14 flex justify-center items-center rounded-full text-role-nurse bg-role-nurse-bg dark:text-role-nurse-dark dark:bg-role-nurse/20">
@@ -148,8 +150,8 @@
             </div>
           </a>
 
-          <a href="./dashboard.html"
-            class="bg-surface dark:bg-surface-dark p-5 flex justify-between items-center border border-border dark:border-border-dark hover:-translate-y-1 transition-all duration-200 ease-in-out">
+          <a href="./dashboard.html" data-role="receptionist"
+            class="roleCard bg-surface dark:bg-surface-dark p-5 flex justify-between items-center border border-border dark:border-border-dark hover:-translate-y-1 transition-all duration-200 ease-in-out">
             <div class=" flex gap-3 items-center">
               <div
                 class="w-14 h-14 flex justify-center items-center rounded-full text-role-receptionist bg-role-receptionist-bg dark:text-role-receptionist-dark dark:bg-role-receptionist/20">
