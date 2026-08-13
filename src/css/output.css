@@ -731,6 +731,9 @@
   .dark\:bg-role-receptionist\/20:is(.dark *) {
     background-color: color-mix(in oklab, #E7590B 20%, transparent);
   }
+  .dark\:bg-slate-900:is(.dark *) {
+    background-color: var(--color-slate-900);
+  }
   .dark\:bg-slate-950:is(.dark *) {
     background-color: var(--color-slate-950);
   }
