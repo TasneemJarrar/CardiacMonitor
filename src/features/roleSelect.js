@@ -5,7 +5,6 @@ export function initRoleSelect (){
   roleCards.forEach((card) => {
     card.addEventListener('click', () =>{
       const role = card.dataset.role;
-      console.log(role)
       setRole(role);
     })
   } )

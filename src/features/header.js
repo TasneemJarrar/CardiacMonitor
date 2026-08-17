@@ -1,4 +1,4 @@
-import { clearRole, getRole } from "../js/storage.js";
+import { clearRole, fetchData, getRole } from "../js/storage.js";
 
 const ROLES = {
   doctor: {
@@ -18,7 +18,7 @@ const ROLES = {
   },
 };
 
-export function renderHeader (){
+export async function renderHeader (){
   const role = getRole();
 
   if (!role || !ROLES[role]) {
@@ -26,8 +26,11 @@ export function renderHeader (){
     return;
   }
 
+  const users = await fetchData('/src/data/users.json');
+  const currentUser = users.find(u => u.role === role);
+
   const profile = document.querySelector(".roleProfile");
-  profile.textContent = ROLES[role].text;
+  profile.textContent = currentUser ? getInitials(currentUser.name) : role;
   profile.classList.add(ROLES[role].lightClasses, ROLES[role].darkClasses.split(' '));
 
  const logoutBtn = document.querySelector(".logoutBtn");
@@ -35,4 +38,8 @@ export function renderHeader (){
   clearRole();
   window.location.href = '/index.html';
  });
+}
+
+function getInitials(fullName) {
+  return fullName.trim().split(/\s+/).map(word => word[0]).join('');
 }

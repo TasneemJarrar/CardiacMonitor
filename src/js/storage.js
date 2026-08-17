@@ -32,3 +32,15 @@ export function setRole(role){
 export function clearRole(){
   return removeItem(ROLE_KEY);
 }
+
+//fetch data
+export async function fetchData(path) {
+  try {
+    const res = await fetch(path);
+    if (!res.ok) throw new Error(`Failed to load ${path}`);
+    return await res.json();
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
