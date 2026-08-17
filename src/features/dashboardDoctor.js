@@ -139,7 +139,7 @@ export async function initDoctorDashboard() {
         <div class="md:col-span-4 col-span-12 bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-5">
           <div class="flex justify-between mb-3">
             <h3 class="font-semibold">Upcoming Appointments</h3>
-            <a href="#" class="text-xs text-primary hover:underline transition-all duration-300 ease-in-out">View All</a>
+            <a href="./patientList.html" class="text-xs text-primary hover:underline transition-all duration-300 ease-in-out">View All</a>
           </div>
 
           <div class="flex flex-col gap-2">

@@ -3,6 +3,7 @@ import { renderHeader } from "../features/header.js";
 import { initPatientsList } from "../features/patientList.js";
 import { initRoleSelect } from "../features/roleSelect.js";
 import { renderSidebar } from "../features/sideBar.js";
+import { initVitalsList } from "../features/vitals.js";
 import { getRole } from "./storage.js";
 import { bindThemeToggle, initTheme } from "./theme.js";
 
@@ -18,18 +19,23 @@ if (page === "role-select") {
 if (page === "dashboard") {
   bindThemeToggle();
   renderHeader();
-  renderSidebar()
+  renderSidebar();
 
   const role = getRole();
-  if (role === 'doctor') {
+  if (role === "doctor") {
     initDoctorDashboard();
   }
-
 }
 
-if (page === 'patients') {
+if (page === "patients") {
   await renderHeader();
   renderSidebar();
   bindThemeToggle();
   initPatientsList();
+}
+if (page === "vitals") {
+  await renderHeader();
+  renderSidebar();
+  bindThemeToggle();
+  initVitalsList();
 }

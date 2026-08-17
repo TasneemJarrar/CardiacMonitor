@@ -4,17 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CardioPulse | Cardiac Patient Monitoring Portal</title>
+  <title>Patient Vitals | CardioPulse</title>
   <meta name="description"
-    content="A demo cardiac patient monitoring platform. Choose a role — Doctor, Nurse, or Receptionist — to explore a simulated clinical dashboard experience." />
+    content="Monitor real-time and historical cardiac vitals — heart rate, blood pressure, oxygen saturation, and ECG trends — for individual patients in CardioPulse." />
   <link rel="shortcut icon" href="./assets/icon.ico" type="image/x-icon">
 
-  <meta property="og:title" content="CardioPulse | Cardiac Patient Monitoring Portal" />
+  <meta property="og:title" content="Patient Vitals | CardioPulse" />
   <meta property="og:description"
-    content="A demo cardiac patient monitoring platform. Choose a role — Doctor, Nurse, or Receptionist — to explore a simulated clinical dashboard experience." />
+    content="Monitor real-time and historical cardiac vitals — heart rate, blood pressure, oxygen saturation, and ECG trends — for individual patients in CardioPulse." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://yourproject.example.com/" />
-  <meta property="og:image" content="https://yourproject.example.com/assets/og/og-home.png" />
   <meta property="og:site_name" content="CardioPulse" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css"
@@ -25,7 +23,7 @@
 
 </head>
 
-<body data-page="dashboard"
+<body data-page="vitals"
   class="min-h-screen font-sans bg-gradient-wash text-text-primary dark:bg-gradient-wash-dark dark:text-text-primary-dark transition-all duration-100 ease-in-out">
 
 
@@ -77,8 +75,8 @@
 
   <div class="flex">
 
-    <aside id="sideNav"
-      class="hidden md:flex flex-col gap-8 items-center w-24 min-h-screen bg-surface dark:bg-surface-dark border-r border-border dark:border-border-dark p-4">
+    <aside
+      class="flex flex-col gap-8 items-center w-24 min-h-screen bg-surface dark:bg-surface-dark border-r border-border dark:border-border-dark p-4">
       <div class="flex justify-center items-center w-fit h-fit bg-primary dark:bg-primary-light p-1 rounded-lg ">
         <svg xmlns="http://www.w3.org/2000/svg" class="text-text-primary-dark dark:text-text-primary" width="32"
           height="32" viewBox="0 0 512 512">
@@ -90,8 +88,40 @@
       </nav>
     </aside>
 
-    <main id="dashboard-content" class="flex-1 p-6">
-      <h1 class="text-2xl font-semibold">Dashboard</h1>
+    <main id="vitals-content" class="flex-1 p-6">
+      <h1 class="text-2xl font-semibold">Vital Records</h1>
+      <p class="text-sm text-text-muted dark:text-text-muted-dark mb-3">Review historical patient monitoring data.</p>
+      <div class="flex gap-4 items-center mb-4">
+        <input id="vitals-search" type="text" placeholder="Search by name..."
+          class="px-4 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm w-64 focus:outline-none focus:ring-2 focus:ring-primary" />
+
+        <div class="flex gap-2">
+          <button data-status="all"
+            class="statusFilterBtn p-2 text-xs font-medium border border-primary text-primary bg-primary/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">All
+            Statuses</button>
+          <button data-status="Stable"
+            class="statusFilterBtn p-2 text-xs font-medium border border-border dark:border-border-dark text-text-muted bg-text-muted/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">Stable</button>
+          <button data-status="Needs Follow-up"
+            class="statusFilterBtn p-2 text-xs font-medium border border-border dark:border-border-dark text-text-muted bg-text-muted/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">Needs
+            Follow-up</button>
+          <button data-status="Critical"
+            class="statusFilterBtn p-2 text-xs font-medium border border-border dark:border-border-dark text-text-muted bg-text-muted/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">Critical</button>
+
+        </div>
+      </div>
+
+      <div class="bg-surface dark:bg-surface-dark p-2 border border-border dark:border-border-dark rounded-lg">
+        <div
+          class="grid grid-cols-12 gap-2 p-2 items-center text-sm border-b border-border last:border-0 dark:border-border-dark hover:bg-background-dark">
+          <p class="col-span-3">Patient</p>
+          <p class="col-span-2">Heart Rate</p>
+          <p class="col-span-3">Blood Presure</p>
+          <p class="col-span-2">Oxygen Level</p>
+          <p class="col-span-2">Condition</p>
+        </div>
+        <div id="vitals-list">
+        </div>
+      </div>
     </main>
   </div>
 
