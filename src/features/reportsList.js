@@ -304,5 +304,3 @@ function applyFilters(allPatients, allAppointments, role) {
 
   renderReports(filtered, allAppointments, role);
 }
-
-console.log(allPatients)

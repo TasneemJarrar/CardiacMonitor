@@ -1,4 +1,4 @@
-import { getRole } from "../js/storage.js";
+import { clearRole, getRole } from "../js/storage.js";
 
 const NAV_ITEMS = {
   dashboard: {
@@ -65,6 +65,12 @@ export function renderSidebar() {
     `;
 
     nav.appendChild(link);
+  });
+
+  const logoutBtn = document.querySelector(".mobileLogoutBtn");
+  logoutBtn.addEventListener("click", () => {
+    clearRole();
+    window.location.href = "./index.html";
   });
 }
 
