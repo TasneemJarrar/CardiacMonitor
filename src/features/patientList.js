@@ -10,7 +10,7 @@ export async function initPatientsList() {
   patientsList.innerHTML = `<p class="text-text-muted dark:text-text-muted-dark">Loading patients...</p>`;
 
   try {
-    allPatients = await fetchData("../../src/data/patients.json");
+    allPatients = await fetchData("./src/data/patients.json");
 
     if (allPatients.length === 0) {
       patientsList.innerHTML = `<p class="text-text-muted dark:text-text-muted-dark">No patients found.</p>`;

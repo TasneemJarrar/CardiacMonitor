@@ -17,8 +17,8 @@ export async function initPatientDetailes() {
 
   try {
     [allPatients, allAppointments] = await Promise.all([
-      fetchData("../../src/data/patients.json"),
-      fetchData("../../src/data/appointments.json"),
+      fetchData("./src/data/patients.json"),
+      fetchData("./src/data/appointments.json"),
     ]);
 
     const patient = allPatients.find((p) => p.id === patientId);

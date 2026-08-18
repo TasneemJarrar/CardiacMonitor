@@ -12,7 +12,7 @@ export async function initVitalsList() {
   VitalsContainer.innerHTML = `<p class="text-text-muted dark:text-text-muted-dark">Loading Vitals...</p>`;
 
   try {
-    allPatients = await fetchData("../../src/data/patients.json");
+    allPatients = await fetchData("./src/data/patients.json");
 
     if (allPatients.length === 0) {
       VitalsContainer.innerHTML = `<p class="text-text-muted dark:text-text-muted-dark">No patients found.</p>`;
