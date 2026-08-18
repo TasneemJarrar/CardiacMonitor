@@ -607,6 +607,27 @@
       border-color: color-mix(in oklab, var(--color-white) 20%, transparent);
     }
   }
+  .bg-background-dark {
+    background-color: #0F172A;
+  }
+  .bg-background-dark-end {
+    background-color: #020617;
+  }
+  .bg-background-dark-end\/10 {
+    background-color: color-mix(in oklab, #020617 10%, transparent);
+  }
+  .bg-background-dark-end\/30 {
+    background-color: color-mix(in oklab, #020617 30%, transparent);
+  }
+  .bg-background-dark\/10 {
+    background-color: color-mix(in oklab, #0F172A 10%, transparent);
+  }
+  .bg-background-dark\/20 {
+    background-color: color-mix(in oklab, #0F172A 20%, transparent);
+  }
+  .bg-background-dark\/30 {
+    background-color: color-mix(in oklab, #0F172A 30%, transparent);
+  }
   .bg-gray-300 {
     background-color: var(--color-gray-300);
   }
@@ -871,6 +892,9 @@
   .whitespace-nowrap {
     white-space: nowrap;
   }
+  .text-background-dark {
+    color: #0F172A;
+  }
   .text-black {
     color: var(--color-black);
   }
@@ -995,6 +1019,9 @@
     .group-hover\:opacity-100:is(:where(.group):hover *) {
       opacity: 100%;
     }
+  }
+  .last\:mb-0:last-child {
+    margin-bottom: 0px;
   }
   .last\:border-0:last-child {
     border-style: var(--tw-border-style);
@@ -1192,6 +1219,9 @@
   .dark\:border-border-dark:is(.dark *) {
     border-color: #334155;
   }
+  .dark\:bg-background-dark-end\/30:is(.dark *) {
+    background-color: color-mix(in oklab, #020617 30%, transparent);
+  }
   .dark\:bg-primary-light:is(.dark *) {
     background-color: #63A4FF;
   }
@@ -1268,8 +1298,14 @@
     .dark\:hover\:border-primary-light\/40:is(.dark *):hover {
       border-color: color-mix(in oklab, #63A4FF 40%, transparent);
     }
+    .dark\:hover\:bg-background:is(.dark *):hover {
+      background-color: #EAF2FF;
+    }
     .dark\:hover\:bg-background-dark:is(.dark *):hover {
       background-color: #0F172A;
+    }
+    .dark\:hover\:bg-background-dark-end:is(.dark *):hover {
+      background-color: #020617;
     }
     .dark\:hover\:bg-gray-100\/30:is(.dark *):hover {
       background-color: color-mix(in srgb, oklch(96.7% 0.003 264.542) 30%, transparent);

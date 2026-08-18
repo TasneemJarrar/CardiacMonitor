@@ -4,15 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Patient Vitals | CardioPulse</title>
-  <meta name="description"
-    content="Monitor real-time and historical cardiac vitals — heart rate, blood pressure, oxygen saturation, and ECG trends — for individual patients in CardioPulse." />
+  <title>Reports | CardioPulse</title>
+  <meta name="description" content="" />
   <link rel="shortcut icon" href="./assets/icon.ico" type="image/x-icon">
 
-  <meta property="og:title" content="Patient Vitals | CardioPulse" />
-  <meta property="og:description"
-    content="Monitor real-time and historical cardiac vitals — heart rate, blood pressure, oxygen saturation, and ECG trends — for individual patients in CardioPulse." />
+  <meta property="og:title" content="Reports | CardioPulse" />
+  <meta property="og:description" content="" />
   <meta property="og:type" content="website" />
+  <!-- <meta property="og:url" content="https://yourproject.example.com/" />
+  <meta property="og:image" content="https://yourproject.example.com/assets/og/og-home.png" /> -->
   <meta property="og:site_name" content="CardioPulse" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css"
@@ -23,7 +23,7 @@
 
 </head>
 
-<body data-page="vitals"
+<body data-page="reports"
   class="min-h-screen font-sans bg-gradient-wash text-text-primary dark:bg-gradient-wash-dark dark:text-text-primary-dark transition-all duration-100 ease-in-out">
 
 
@@ -113,72 +113,33 @@
       </button>
     </aside>
 
-    <main id="vitals-content" class="flex-1 p-6">
-      <h1 class="text-2xl font-semibold">Vital Records</h1>
-      <p class="text-sm text-text-muted dark:text-text-muted-dark mb-3">Review historical patient monitoring data.</p>
-      
-      <div id="add-vital-form"
-        class="hidden bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-5 mb-4">
-        <h3 class="font-semibold mb-3">Log New Vital Reading</h3>
-        <form id="vital-form" class="grid grid-cols-2 md:grid-cols-5 gap-3">
-          <select id="vital-patient-select" required
-            class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm">
-            <option value="" disabled selected>Select Patient</option>
-          </select>
 
-          <input id="vital-heart-rate" type="number" placeholder="Heart Rate" required min="30" max="250"
-            class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" />
+    <main class="flex-1 p-6">
+      <div id="reports-states"></div>
 
-          <input id="vital-blood-pressure" type="text" placeholder="120/80" required pattern="\d{2,3}/\d{2,3}"
-            class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" />
-
-          <input id="vital-oxygen" type="number" placeholder="Oxygen %" required min="50" max="100"
-            class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" />
-
-          <div class="flex gap-2">
-            <button type="submit"
-              class="flex-1 bg-primary hover:bg-primary-dark text-white text-sm rounded-lg px-3 py-2 transition-colors">Save</button>
-            <button type="button" id="cancel-vital-btn"
-              class="text-sm text-text-muted hover:text-status-error transition-colors px-2">Cancel</button>
-          </div>
-        </form>
-
-        <p id="vital-form-message" class="text-xs mt-2 hidden"></p>
-      </div>
-
-      <div class="flex gap-4 items-end mb-4">
+      <div id="report-search" class="flex gap-4 items-end mb-4">
         <div class="flex flex-col gap-1 w-full">
-          <label for="vitals-search" class="text-xs text-text-muted dark:text-text-muted-dark ml-1">Search</label>
-          <input id="vitals-search" type="text" placeholder="Search by name..."
+          <label for="report-input" class="text-xs text-text-muted dark:text-text-muted-dark ml-1">Search</label>
+          <input id="report-input" type="text" placeholder="Search by name or reason..."
             class="w-full px-4 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm focus:outline-none focus:ring-2 focus:ring-primary text-text-muted dark:text-text-muted-dark" />
         </div>
 
-        <div class="flex gap-2 items-end w-full">
-          <button data-status="all"
-            class="statusFilterBtn p-2 text-xs font-medium border border-primary text-primary bg-primary/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">All
-            Statuses</button>
-          <button data-status="Stable"
-            class="statusFilterBtn p-2 text-xs font-medium border border-border dark:border-border-dark text-text-muted bg-text-muted/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">Stable</button>
-          <button data-status="Needs Follow-up"
-            class="statusFilterBtn p-2 text-xs font-medium border border-border dark:border-border-dark text-text-muted bg-text-muted/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">Awaiting</button>
-          <button data-status="Critical"
-            class="statusFilterBtn p-2 text-xs font-medium border border-border dark:border-border-dark text-text-muted bg-text-muted/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">Critical</button>
-
+        <div class="flex flex-col gap-1">
+          <label for="condition-filter" class="text-xs text-text-muted dark:text-text-muted-dark ml-1">Condition</label>
+          <select id="condition-filter"
+            class="px-4 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+            <option value="all" selected>All Conditions</option>
+            <option value="Stable">Stable</option>
+            <option value="Needs Follow-up">Needs Follow-up</option>
+            <option value="Critical">Critical</option>
+          </select>
         </div>
+
+        <button id="clear-filters"
+          class="text-xs bg-primary hover:bg-primary-dark dark:hover:bg-primary-light p-2 rounded-lg">Clear</button>
       </div>
 
-      <div class="bg-surface dark:bg-surface-dark p-2 border border-border dark:border-border-dark rounded-lg">
-        <div
-          class="grid grid-cols-12 gap-2 p-2 items-center text-sm border-b border-border last:border-0 dark:border-border-dark ">
-          <p class="col-span-3">Patient</p>
-          <p class="col-span-2">Heart Rate</p>
-          <p class="col-span-3">Blood Presure</p>
-          <p class="col-span-2">Oxygen Level</p>
-          <p class="col-span-2">Condition</p>
-        </div>
-        <div id="vitals-list">
-        </div>
-      </div>
+      <div id="reports-content"></div>
     </main>
   </div>
 

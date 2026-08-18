@@ -100,7 +100,7 @@ function renderVitals(patients, role) {
             <p class="font-medium">${p.name}</p>
             <p class="text-xs text-text-muted dark:text-text-muted-dark">ID: ${p.id}</p>
           </div>
-          <p class="col-span-2">${p.heartRate}<span class="text-xs text-text-muted dark:text-text-muted-dark"> bpr</span></p>
+          <p class="col-span-2">${p.heartRate}<span class="text-xs text-text-muted dark:text-text-muted-dark"> bpm</span></p>
           <p class="col-span-3">${p.bloodPressure}<span class="text-xs text-text-muted dark:text-text-muted-dark"> mm Hg</span></p>
           <p class="col-span-2">${p.oxygenLevel}<span class="text-xs text-text-muted dark:text-text-muted-dark">%</span></p>
           <div class="col-span-2"> <span class="px-2 py-1 rounded-full font-medium ${c.style}">${c.label}</span></div>

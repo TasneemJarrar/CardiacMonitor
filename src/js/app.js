@@ -3,6 +3,7 @@ import { initDoctorDashboard } from "../features/dashboardDoctor.js";
 import { renderHeader } from "../features/header.js";
 import { initPatientDetailes } from "../features/patientDetailes.js";
 import { initPatientsList } from "../features/patientList.js";
+import { initReportsList } from "../features/reportsList.js";
 import { initRoleSelect } from "../features/roleSelect.js";
 import { bindSideBarToggle, renderSidebar } from "../features/sideBar.js";
 import { initVitalsList } from "../features/vitals.js";
@@ -60,4 +61,12 @@ if (page === "patientDetailes") {
   bindThemeToggle();
   bindSideBarToggle();
   initPatientDetailes();
+}
+
+if (page === "reports") {
+  await renderHeader();
+  renderSidebar();
+  bindThemeToggle();
+  bindSideBarToggle();
+  initReportsList();
 }

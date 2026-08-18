@@ -30,7 +30,7 @@
 
 
   <header
-    class="w-full dark:bg-gradient-wash-dark border-b sticky top-0 left-0 right-0 z-20 border-border dark:border-border-dark">
+    class="w-full bg-gradient-wash dark:bg-gradient-wash-dark border-b sticky top-0 left-0 right-0 z-20 border-border dark:border-border-dark">
     <div class="container mx-auto py-3 px-4 md:px-6 flex justify-between">
       <div class="flex gap-3 items-center">
         <button
@@ -82,8 +82,8 @@
   <div class="flex">
 
     <aside id="sideNav"
-      class="hidden md:flex flex-col justify-between group w-16 hover:w-44 transition-all duration-300 min-h-screen bg-surface dark:bg-surface-dark border-r border-border dark:border-border-dark p-4 fixed md:static top-0 left-0 z-30 md:z-10 md:top-16 bottom-0">
-      <div class="flex flex-col gap-8">
+      class="hidden md:flex flex-col justify-between group w-20 hover:w-44 transition-all duration-300 min-h-screen bg-surface dark:bg-surface-dark border-r border-border dark:border-border-dark p-4 fixed md:static top-0 left-0 z-30 md:z-10 md:top-16 bottom-0">
+      <div class="flex flex-col gap-8 justify-center">
         <div class="flex justify-center items-center w-fit h-fit bg-primary dark:bg-primary-light p-1 rounded-lg">
           <svg xmlns="http://www.w3.org/2000/svg" class="text-text-primary-dark dark:text-text-primary" width="32"
             height="32" viewBox="0 0 512 512">
@@ -188,14 +188,9 @@
           <input id="date-filter" type="date"
             class="px-4 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm focus:outline-none focus:ring-2 focus:ring-primary text-text-muted dark:text-text-muted-dark hover:text-primary dark:hover:text-primary-light" />
         </div>
+        
         <button id="clear-filters"
           class="text-xs bg-primary hover:bg-primary-dark dark:hover:bg-primary-light p-2 rounded-lg">Clear</button>
-
-        <button id="add-appointment-btn"
-          class="hidden bg-primary hover:bg-primary-dark text-white text-sm px-4 py-2 rounded-lg transition-colors">
-          New Appointment
-        </button>
-
       </div>
 
       <div class="bg-surface dark:bg-surface-dark p-2 border border-border dark:border-border-dark rounded-lg">
