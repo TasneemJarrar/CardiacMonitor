@@ -28,7 +28,7 @@ export async function renderHeader() {
   const role = getRole();
 
   if (!role || !ROLES[role]) {
-    window.location.href = "/index.html";
+    window.location.href = "./index.html";
     return;
   }
 
@@ -51,7 +51,7 @@ export async function renderHeader() {
   const logoutBtn = document.querySelector(".logoutBtn");
   logoutBtn.addEventListener("click", () => {
     clearRole();
-    window.location.href = "/index.html";
+    window.location.href = "./index.html";
   });
 }
 

@@ -113,7 +113,7 @@ function renderVitals(patients, role) {
 
   document.querySelectorAll(".vital-patient-row").forEach((row) => {
     row.addEventListener("click", () => {
-      window.location.href = `/patientDetails.html?id=${row.dataset.id}`;
+      window.location.href = `./patientDetails.html?id=${row.dataset.id}`;
     });
   });
 }

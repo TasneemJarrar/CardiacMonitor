@@ -52,7 +52,7 @@ function renderPatients(patients) {
   if (role === "doctor") {
     document.querySelectorAll(".patient-row").forEach((row) => {
       row.addEventListener("click", () => {
-        window.location.href = `/patientDetails.html?id=${row.dataset.id}`;
+        window.location.href = `./patientDetails.html?id=${row.dataset.id}`;
       });
     });
   }

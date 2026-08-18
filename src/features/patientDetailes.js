@@ -9,7 +9,7 @@ export async function initPatientDetailes() {
   const role = getRole();
 
   if (role === "receptionist") {
-    window.location.href = "/patients.html";
+    window.location.href = "./patientList.html";
     return;
   }
 
@@ -24,7 +24,7 @@ export async function initPatientDetailes() {
     const patient = allPatients.find((p) => p.id === patientId);
 
     if (!patient) {
-      patientsList.innerHTML = `<p class="text-text-muted dark:text-text-muted-dark">No patient data found.</p>`;
+      main.innerHTML = `<p class="text-text-muted dark:text-text-muted-dark">No patient data found.</p>`;
       return;
     }
 
@@ -83,7 +83,7 @@ function renderPatientDetails(patient, appointments, role) {
       : "";
 
   main.innerHTML = `
-    <a href="/patientList.html" class="text-sm text-primary hover:underline mb-4 inline-block">← Back to Patients</a>
+    <a href="./patientList.html" class="text-sm text-primary hover:underline mb-4 inline-block">← Back to Patients</a>
 
     <div class="bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-6 mb-6">
       <div class="flex justify-between items-start">

@@ -97,7 +97,7 @@ function renderAppointments(appointments, role) {
   } else {
     document.querySelectorAll(".appointment-patient-row").forEach((row) => {
       row.addEventListener("click", () => {
-        window.location.href = `/patientDetails.html?id=${row.dataset.id}`;
+        window.location.href = `./patientDetails.html?id=${row.dataset.id}`;
       });
     });
   }

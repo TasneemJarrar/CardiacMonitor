@@ -237,13 +237,13 @@ export async function initDoctorDashboard() {
 
     document.querySelectorAll(".vital-patient-row").forEach((row) => {
       row.addEventListener("click", () => {
-        window.location.href = `/patientDetails.html?id=${row.dataset.id}`;
+        window.location.href = `./patientDetails.html?id=${row.dataset.id}`;
       });
     });
 
     document.querySelectorAll(".appointment-patient-row").forEach((row) => {
       row.addEventListener("click", () => {
-        window.location.href = `/patientDetails.html?id=${row.dataset.id}`;
+        window.location.href = `./patientDetails.html?id=${row.dataset.id}`;
       });
     });
   } catch (err) {
