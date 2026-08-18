@@ -17,9 +17,9 @@ export async function initAppointmentsList() {
 
   try {
     [allPatients, allAppointments, allUsers] = await Promise.all([
-      fetchData("/src/data/patients.json"),
-      fetchData("/src/data/appointments.json"),
-      fetchData("/src/data/users.json"),
+      fetchData("../../src/data/patients.json"),
+      fetchData("../../src/data/appointments.json"),
+      fetchData("../../src/data/users.json"),
     ]);
 
     allDoctors = allUsers.filter((u) => u.role === "doctor");

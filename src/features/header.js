@@ -32,7 +32,7 @@ export async function renderHeader() {
     return;
   }
 
-  const users = await fetchData("/src/data/users.json");
+  const users = await fetchData("../../src/data/users.json");
   const currentUser = users.find((u) => u.role === role);
 
   const profile = document.querySelector(".roleProfile");

@@ -7,9 +7,9 @@ export async function initDoctorDashboard() {
 
   try {
     const [patients, appointments, users] = await Promise.all([
-      fetchData("/src/data/patients.json"),
-      fetchData("/src/data/appointments.json"),
-      fetchData("/src/data/users.json"),
+      fetchData("../../src/data/patients.json"),
+      fetchData("../../src/data/appointments.json"),
+      fetchData("../../src/data/users.json"),
     ]);
 
     if (patients.length === 0) {
