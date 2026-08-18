@@ -51,3 +51,18 @@ export function renderSidebar() {
     nav.appendChild(link);
   });
 }
+
+export function bindSideBarToggle() {
+  const menuBtn = document.querySelector(".menuBtn");
+  const sideNav = document.querySelector("#sideNav");
+
+  if (!menuBtn || !sideNav) return;
+  menuBtn.addEventListener("click", () => {
+    toggleSideBar(sideNav)});
+  
+}
+
+function toggleSideBar(sideNav) {
+  sideNav.classList.toggle("hidden");
+}
+

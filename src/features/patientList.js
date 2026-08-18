@@ -45,7 +45,7 @@ function renderPatients(patients) {
   if (role === "doctor") {
     document.querySelectorAll(".patient-row").forEach((row) => {
       row.addEventListener("click", () => {
-        window.location.href = `/patient-details.html?id=${row.dataset.id}`;
+        window.location.href = `/patientDetails.html?id=${row.dataset.id}`;
       });
     });
   }
@@ -65,7 +65,7 @@ function renderPatientRow(p, role) {
       <div class="bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-4 flex justify-between items-center">
         <div>
           <p class="font-semibold">${p.name}</p>
-          <p class="text-xs text-text-muted">Age ${p.age} · ID: ${p.id}</p>
+          <p class="text-xs text-text-muted">Age ${p.age} - ID: ${p.id}</p>
         </div>
       </div>
     `;
@@ -73,10 +73,10 @@ function renderPatientRow(p, role) {
 
   if (role === "nurse") {
     return `
-      <div class="bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-4 flex justify-between items-center">
+      <div data-id='${p.id}' class="patient-row cursor-pointer bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-4 flex justify-between items-center">
         <div>
           <p class="font-semibold">${p.name}</p>
-          <p class="text-xs text-text-muted">Age ${p.age} · ${p.gender}</p>
+          <p class="text-xs text-text-muted">Age ${p.age} - ${p.gender}</p>
         </div>
         <span class="text-xs px-2 py-1 rounded-full ${statusClass}">${p.condition}</span>
       </div>
@@ -84,10 +84,10 @@ function renderPatientRow(p, role) {
   }
 
   return `
-    <div class="patient-row cursor-pointer hover:-translate-y-0.5 transition-all bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-4 flex justify-between items-center" data-id="${p.id}">
+    <div data-id='${p.id}' class="patient-row cursor-pointer hover:-translate-y-0.5 transition-all bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-4 flex justify-between items-center">
       <div>
         <p class="font-semibold">${p.name}</p>
-        <p class="text-xs text-text-muted">Age ${p.age} · ${p.gender} · ${p.diagnosis}</p>
+        <p class="text-xs text-text-muted">Age ${p.age} - ${p.gender} - ${p.diagnosis}</p>
       </div>
       <div class="flex items-center gap-3">
         <span class="text-xs text-text-muted">${p.heartRate} bpm</span>

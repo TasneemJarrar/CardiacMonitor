@@ -55,6 +55,10 @@
         </button>
 
         <span class="roleProfile w-10 h-10 rounded-full text-sm text-white flex justify-center items-center"></span>
+        <div class=" flex flex-col justify-center">
+          <p id="user-name" class="text-sm font-semibold"></p>
+          <span id="role" class="text-xs"></span>
+        </div>
 
         <button
           class="logoutBtn w-10 h-10 flex justify-center items-center hover:bg-primary/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">
@@ -66,7 +70,6 @@
                 d="M15.293 6.293a1 1 0 0 1 1.414 0l5 5a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414-1.414L18.586 13H10a1 1 0 1 1 0-2h8.586l-3.293-3.293a1 1 0 0 1 0-1.414" />
             </g>
           </svg>
-
         </button>
       </div>
 
@@ -75,35 +78,68 @@
 
   <div class="flex">
 
-    <aside
-      class="flex flex-col gap-8 items-center w-24 min-h-screen bg-surface dark:bg-surface-dark border-r border-border dark:border-border-dark p-4">
-      <div class="flex justify-center items-center w-fit h-fit bg-primary dark:bg-primary-light p-1 rounded-lg ">
+    <aside id="sideNav"
+      class="hidden md:flex md:flex-col md:gap-8  min-h-screen bg-surface dark:bg-surface-dark border-r border-border dark:border-border-dark p-4 fixed md:static top-16 left-0 z-10">
+      <div
+        class="flex justify-center items-center w-fit h-fit bg-primary dark:bg-primary-light p-1 rounded-lg mb-8 md:mb-0">
         <svg xmlns="http://www.w3.org/2000/svg" class="text-text-primary-dark dark:text-text-primary" width="32"
           height="32" viewBox="0 0 512 512">
           <path fill="currentColor"
             d="M432 272a48.09 48.09 0 0 0-45.25 32h-39.22l-28.35-85.06a16 16 0 0 0-30.56.66l-44.51 155.76l-52.33-314a16 16 0 0 0-31.3-1.25L99.51 304H48a16 16 0 0 0 0 32h64a16 16 0 0 0 15.52-12.12l45.34-181.37l51.36 308.12A16 16 0 0 0 239.1 464h.91a16 16 0 0 0 15.37-11.6l49.8-174.28l15.64 46.94A16 16 0 0 0 336 336h50.75A48 48 0 1 0 432 272" />
         </svg>
       </div>
-      <nav class="sidebarNav flex flex-col  gap-4">
+      <nav class="sidebarNav flex flex-col gap-4 items-start">
       </nav>
     </aside>
 
     <main id="vitals-content" class="flex-1 p-6">
       <h1 class="text-2xl font-semibold">Vital Records</h1>
       <p class="text-sm text-text-muted dark:text-text-muted-dark mb-3">Review historical patient monitoring data.</p>
-      <div class="flex gap-4 items-center mb-4">
-        <input id="vitals-search" type="text" placeholder="Search by name..."
-          class="px-4 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm w-64 focus:outline-none focus:ring-2 focus:ring-primary" />
+      
+      <div id="add-vital-form"
+        class="hidden bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-5 mb-4">
+        <h3 class="font-semibold mb-3">Log New Vital Reading</h3>
+        <form id="vital-form" class="grid grid-cols-2 md:grid-cols-5 gap-3">
+          <select id="vital-patient-select" required
+            class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm">
+            <option value="" disabled selected>Select Patient</option>
+          </select>
 
-        <div class="flex gap-2">
+          <input id="vital-heart-rate" type="number" placeholder="Heart Rate" required min="30" max="250"
+            class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" />
+
+          <input id="vital-blood-pressure" type="text" placeholder="120/80" required pattern="\d{2,3}/\d{2,3}"
+            class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" />
+
+          <input id="vital-oxygen" type="number" placeholder="SpO2 %" required min="50" max="100"
+            class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" />
+
+          <div class="flex gap-2">
+            <button type="submit"
+              class="flex-1 bg-primary hover:bg-primary-dark text-white text-sm rounded-lg px-3 py-2 transition-colors">Save</button>
+            <button type="button" id="cancel-vital-btn"
+              class="text-sm text-text-muted hover:text-status-error transition-colors px-2">Cancel</button>
+          </div>
+        </form>
+
+        <p id="vital-form-message" class="text-xs mt-2 hidden"></p>
+      </div>
+
+      <div class="flex gap-4 items-end mb-4">
+        <div class="flex flex-col gap-1 w-full">
+          <label for="vitals-search" class="text-xs text-text-muted dark:text-text-muted-dark ml-1">Search</label>
+          <input id="vitals-search" type="text" placeholder="Search by name..."
+            class="w-full px-4 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm focus:outline-none focus:ring-2 focus:ring-primary text-text-muted dark:text-text-muted-dark" />
+        </div>
+
+        <div class="flex gap-2 items-end w-full">
           <button data-status="all"
             class="statusFilterBtn p-2 text-xs font-medium border border-primary text-primary bg-primary/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">All
             Statuses</button>
           <button data-status="Stable"
             class="statusFilterBtn p-2 text-xs font-medium border border-border dark:border-border-dark text-text-muted bg-text-muted/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">Stable</button>
           <button data-status="Needs Follow-up"
-            class="statusFilterBtn p-2 text-xs font-medium border border-border dark:border-border-dark text-text-muted bg-text-muted/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">Needs
-            Follow-up</button>
+            class="statusFilterBtn p-2 text-xs font-medium border border-border dark:border-border-dark text-text-muted bg-text-muted/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">Awaiting</button>
           <button data-status="Critical"
             class="statusFilterBtn p-2 text-xs font-medium border border-border dark:border-border-dark text-text-muted bg-text-muted/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">Critical</button>
 
@@ -112,7 +148,7 @@
 
       <div class="bg-surface dark:bg-surface-dark p-2 border border-border dark:border-border-dark rounded-lg">
         <div
-          class="grid grid-cols-12 gap-2 p-2 items-center text-sm border-b border-border last:border-0 dark:border-border-dark hover:bg-background-dark">
+          class="grid grid-cols-12 gap-2 p-2 items-center text-sm border-b border-border last:border-0 dark:border-border-dark ">
           <p class="col-span-3">Patient</p>
           <p class="col-span-2">Heart Rate</p>
           <p class="col-span-3">Blood Presure</p>

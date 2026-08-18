@@ -25,7 +25,7 @@
 
 </head>
 
-<body data-page="dashboard"
+<body data-page="appointments"
   class="min-h-screen font-sans bg-gradient-wash text-text-primary dark:bg-gradient-wash-dark dark:text-text-primary-dark transition-all duration-100 ease-in-out">
 
 
@@ -95,27 +95,56 @@
     </aside>
 
 
-    <main id="dashboard-content" class="flex-1 p-6">
-      <div
-        class="relative overflow-hidden bg-gradient-hero-dark rounded-lg px-8 py-9 mb-6 text-white">
-        <div
-          class="absolute hidden right-14 top-1/2 -translate-y-1/2 w-24 h-24 rounded-lg border border-white/20 bg-white/5 backdrop-blur-sm md:flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="text-text-primary-dark dark:text-text-primary" width="48"
-            height="48" viewBox="0 0 512 512">
-            <path fill="currentColor"
-              d="M432 272a48.09 48.09 0 0 0-45.25 32h-39.22l-28.35-85.06a16 16 0 0 0-30.56.66l-44.51 155.76l-52.33-314a16 16 0 0 0-31.3-1.25L99.51 304H48a16 16 0 0 0 0 32h64a16 16 0 0 0 15.52-12.12l45.34-181.37l51.36 308.12A16 16 0 0 0 239.1 464h.91a16 16 0 0 0 15.37-11.6l49.8-174.28l15.64 46.94A16 16 0 0 0 336 336h50.75A48 48 0 1 0 432 272" />
-          </svg>
+    <main id="appointments-content" class="flex-1 p-6">
+      <h1 class="text-2xl font-semibold">Appointments</h1>
+      <p class="text-sm text-text-muted dark:text-text-muted-dark mb-3">Manage your upcoming patient consultations.</p>
+      <div class="flex gap-4 items-end mb-4">
+        <div class="flex flex-col gap-1 w-full">
+          <label for="appointments-search" class="text-xs text-text-muted dark:text-text-muted-dark ml-1">Search</label>
+          <input id="appointments-search" type="text" placeholder="Search by name or reason..."
+            class="w-full px-4 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm focus:outline-none focus:ring-2 focus:ring-primary text-text-muted dark:text-text-muted-dark" />
         </div>
 
-        <div class="">
-          <p class="text-sm font-bold tracking-[0.14em] text-blue-300 uppercase mb-7"></p>
-          <h1 id="welcomeUser-name" class="text-4xl md:text-5xl font-light tracking-tight mb-4"></h1>
-          <p class="text-base md:text-lg text-blue-100">
-            Here is the clinical overview for your cardiac patients.
-          </p>
+        <div class="flex flex-col gap-1">
+          <label for="status-filter" class="text-xs text-text-muted dark:text-text-muted-dark ml-1">Status</label>
+
+          <select id="status-filter"
+            class="px-4 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+            <option value="all" selected>All Statuses</option>
+            <option value="Scheduled">Scheduled</option>
+            <option value="Urgent">Urgent</option>
+            <option value="Completed">Completed</option>
+          </select>
         </div>
+
+        <div class="flex flex-col gap-1">
+          <label for="date-filter" class="text-xs text-text-muted dark:text-text-muted-dark ml-1">Date</label>
+
+          <input id="date-filter" type="date"
+            class="px-4 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm focus:outline-none focus:ring-2 focus:ring-primary text-text-muted dark:text-text-muted-dark hover:text-primary dark:hover:text-primary-light" />
+        </div>
+        <button id="clear-filters"
+          class="text-xs bg-primary hover:bg-primary-dark dark:hover:bg-primary-light p-2 rounded-lg">Clear</button>
+
+        <button id="add-appointment-btn"
+          class="hidden bg-primary hover:bg-primary-dark text-white text-sm px-4 py-2 rounded-lg transition-colors">
+          New Appointment
+        </button>
 
       </div>
+
+      <div class="bg-surface dark:bg-surface-dark p-2 border border-border dark:border-border-dark rounded-lg">
+        <div
+          class="grid grid-cols-12 gap-2 p-2 items-center text-sm border-b border-border last:border-0 dark:border-border-dark ">
+          <p class="col-span-3">Patient</p>
+          <p class="col-span-3">Doctor</p>
+          <p class="col-span-3">Date & Time</p>
+          <p class="col-span-3">Status</p>
+        </div>
+        <div id="appointments-list">
+        </div>
+      </div>
+
 
     </main>
   </div>

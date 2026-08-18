@@ -52,6 +52,10 @@
         </button>
 
         <span class="roleProfile w-10 h-10 rounded-full text-sm text-white flex justify-center items-center"></span>
+        <div class=" flex flex-col justify-center">
+          <p id="user-name" class="text-sm font-semibold"></p>
+          <span id="role" class="text-xs"></span>
+        </div>
 
         <button
           class="logoutBtn w-10 h-10 flex justify-center items-center hover:bg-primary/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">
@@ -63,7 +67,6 @@
                 d="M15.293 6.293a1 1 0 0 1 1.414 0l5 5a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414-1.414L18.586 13H10a1 1 0 1 1 0-2h8.586l-3.293-3.293a1 1 0 0 1 0-1.414" />
             </g>
           </svg>
-
         </button>
       </div>
 
@@ -72,16 +75,17 @@
 
   <div class="flex">
 
-    <aside
-      class="flex flex-col gap-8 items-center w-24 min-h-screen bg-surface dark:bg-surface-dark border-r border-border dark:border-border-dark p-4">
-      <div class="flex justify-center items-center w-fit h-fit bg-primary dark:bg-primary-light p-1 rounded-lg ">
+    <aside id="sideNav"
+      class="hidden md:flex md:flex-col md:gap-8  min-h-screen bg-surface dark:bg-surface-dark border-r border-border dark:border-border-dark p-4 fixed md:static top-16 left-0 z-10">
+      <div
+        class="flex justify-center items-center w-fit h-fit bg-primary dark:bg-primary-light p-1 rounded-lg mb-8 md:mb-0">
         <svg xmlns="http://www.w3.org/2000/svg" class="text-text-primary-dark dark:text-text-primary" width="32"
           height="32" viewBox="0 0 512 512">
           <path fill="currentColor"
             d="M432 272a48.09 48.09 0 0 0-45.25 32h-39.22l-28.35-85.06a16 16 0 0 0-30.56.66l-44.51 155.76l-52.33-314a16 16 0 0 0-31.3-1.25L99.51 304H48a16 16 0 0 0 0 32h64a16 16 0 0 0 15.52-12.12l45.34-181.37l51.36 308.12A16 16 0 0 0 239.1 464h.91a16 16 0 0 0 15.37-11.6l49.8-174.28l15.64 46.94A16 16 0 0 0 336 336h50.75A48 48 0 1 0 432 272" />
         </svg>
       </div>
-      <nav class="sidebarNav flex flex-col  gap-4">
+      <nav class="sidebarNav flex flex-col gap-4 items-start">
       </nav>
     </aside>
 
@@ -89,15 +93,15 @@
       <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-semibold">Patients</h1>
         <input id="patient-search" type="text" placeholder="Search by name..."
-          class="px-4 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm w-64 focus:outline-none focus:ring-2 focus:ring-primary" />
+          class="px-4 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm w-64 focus:outline-none focus:ring-2 focus:ring-primary text-text-muted dark:text-text-muted-dark" />
       </div>
 
       <div id="patients-list" class="flex flex-col gap-2">
-    
       </div>
     </main>
+  </div>
 
-    <script type="module" src="./src/js/app.js"></script>
+  <script type="module" src="./src/js/app.js"></script>
 
 
 </body>
