@@ -167,8 +167,6 @@ function initAddVitalForm() {
     renderVitals(allPatients);
 
     setTimeout(() => {
-      formDiv.classList.add("hidden");
-      showBtn.classList.remove("hidden");
       message.classList.add("hidden");
     }, 1200);
   });

@@ -18,6 +18,7 @@ export function removeItem(key) {
   localStorage.removeItem(key);
 }
 
+
 //role helper
 const ROLE_KEY = "role";
 

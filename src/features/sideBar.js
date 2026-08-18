@@ -39,15 +39,25 @@ export function renderSidebar() {
   const currentPage = document.body.dataset.page;
   const pageNavs = ROLE_NAVS[role];
 
+  nav.innerHTML = "";
+  
   pageNavs.forEach((key) => {
     const item = NAV_ITEMS[key];
     const isActive = item.page === currentPage;
     const link = document.createElement("a");
     link.href = item.href;
-    link.innerHTML = item.icon;
-    link.className = isActive
-      ? "p-2 rounded-lg bg-primary/15 text-primary transition-all duration-200 ease-in-out dark:bg-primary/25 dark:text-primary-light"
-      : "p-2 rounded-lg text-text-secondary transition-all duration-200 ease-in-out hover:scale-105 hover:bg-primary/10 hover:text-primary dark:text-text-secondary-dark dark:hover:bg-primary/15 dark:hover:text-primary-light";
+    link.innerHTML = `
+      ${item.icon}
+      <span class="hidden group-hover:inline whitespace-nowrap">${item.text}</span>
+    `;
+    link.className = `flex gap-2 items-center p-2 rounded-lg transition-all duration-200 ease-in-out
+      ${
+        isActive
+          ? "bg-primary/15 text-primary dark:bg-primary/25 dark:text-primary-light"
+          : "text-text-secondary hover:scale-105 hover:bg-primary/10 hover:text-primary dark:text-text-secondary-dark dark:hover:bg-primary/15 dark:hover:text-primary-light"
+      }
+    `;
+
     nav.appendChild(link);
   });
 }
@@ -55,14 +65,19 @@ export function renderSidebar() {
 export function bindSideBarToggle() {
   const menuBtn = document.querySelector(".menuBtn");
   const sideNav = document.querySelector("#sideNav");
+  const closeBtn = document.querySelector("#closeSideNav");
 
   if (!menuBtn || !sideNav) return;
-  menuBtn.addEventListener("click", () => {
-    toggleSideBar(sideNav)});
-  
-}
+  if (menuBtn) {
+    menuBtn.addEventListener("click", () => {
+      sideNav.classList.remove("hidden");
+      sideNav.classList.add("flex");
+    });
+  }
 
-function toggleSideBar(sideNav) {
-  sideNav.classList.toggle("hidden");
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      sideNav.classList.add("hidden");
+    });
+  }
 }
-

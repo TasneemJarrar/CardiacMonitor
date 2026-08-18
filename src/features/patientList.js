@@ -5,6 +5,7 @@ let allPatients = [];
 export async function initPatientsList() {
   const patientsList = document.getElementById("patients-list");
   const searchInput = document.getElementById("patient-search");
+  const role = getRole();
 
   patientsList.innerHTML = `<p class="text-text-muted dark:text-text-muted-dark">Loading patients...</p>`;
 
@@ -25,6 +26,10 @@ export async function initPatientsList() {
       );
       renderPatients(filtered);
     });
+
+    if (role === "doctor") {
+      initAddPatientForm();
+    }
   } catch (err) {
     patientsList.innerHTML = `
       <div class="text-status-error dark:text-status-error-dark">
@@ -41,7 +46,9 @@ export async function initPatientsList() {
 function renderPatients(patients) {
   const patientsList = document.getElementById("patients-list");
   const role = getRole();
-  patientsList.innerHTML = patients.map((p) => renderPatientRow(p, role)).join("");
+  patientsList.innerHTML = patients
+    .map((p) => renderPatientRow(p, role))
+    .join("");
   if (role === "doctor") {
     document.querySelectorAll(".patient-row").forEach((row) => {
       row.addEventListener("click", () => {
@@ -95,4 +102,65 @@ function renderPatientRow(p, role) {
       </div>
     </div>
   `;
+}
+
+function initAddPatientForm() {
+  const formDiv = document.querySelector("#add-patient-form");
+  const form = document.querySelector("#patient-form");
+
+  if (!formDiv || !form) return;
+
+  formDiv.classList.remove("hidden");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = document.querySelector("#patient-name").value.trim();
+    const age = document.querySelector("#patient-age").value;
+    const gender = document.querySelector("#patient-gender").value;
+    const phone = document.querySelector("#patient-phone").value.trim();
+    const bloodType = document.querySelector("#patient-blood-type").value;
+    const condition = document.querySelector("#patient-condition").value;
+    const diagnosis = document.querySelector("#patient-diagnosis").value.trim();
+    const heartRate = document.querySelector("#patient-heart-rate").value;
+    const bloodPressure = document
+      .querySelector("#patient-blood-pressure")
+      .value.trim();
+    const oxygenLevel = document.querySelector("#patient-oxygen").value;
+
+    const bpPattern = /^\d{2,3}\/\d{2,3}$/;
+    if (!bpPattern.test(bloodPressure)) {
+      showPatientMessage("Blood pressure must be something like 120/80", "error");
+      return;
+    }
+
+    const newPatient = {
+      id: String(Date.now()),
+      name,
+      age: Number(age),
+      gender,
+      phone,
+      bloodType,
+      condition,
+      diagnosis,
+      heartRate: Number(heartRate),
+      bloodPressure,
+      oxygenLevel: Number(oxygenLevel),
+      doctorId: "1", 
+      };
+
+    allPatients.push(newPatient);
+    showPatientMessage(`${name} added successfully.`, "success");
+    form.reset();
+    renderPatients(allPatients);
+  });
+}
+
+function showPatientMessage(text, type) {
+  const message = document.querySelector("#patient-form-message");
+  message.textContent = text;
+  message.className =
+    type === "success"
+      ? "text-xs mt-2 text-status-success"
+      : "text-xs mt-2 text-status-error";
 }
