@@ -78,7 +78,6 @@
   </header>
 
   <div class="flex">
-
     <aside id="sideNav"
       class="hidden md:flex flex-col justify-between group w-20 hover:w-44 transition-all duration-300 min-h-screen bg-surface dark:bg-surface-dark border-r border-border dark:border-border-dark p-4 fixed md:static top-0 left-0 z-30 md:z-10 md:top-16 bottom-0">
       <div class="flex flex-col gap-8 justify-center">
@@ -126,13 +125,13 @@
             <option value="" disabled selected>Select Patient</option>
           </select>
 
-          <input id="vital-heart-rate" type="number" placeholder="Heart Rate" required min="30" max="250"
+          <input id="vital-heart-rate" type="number" placeholder="Heart Rate" required min="30" max="100"
             class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" />
 
           <input id="vital-blood-pressure" type="text" placeholder="120/80" required pattern="\d{2,3}/\d{2,3}"
             class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" />
 
-          <input id="vital-oxygen" type="number" placeholder="Oxygen %" required min="50" max="100"
+          <input id="vital-oxygen" type="number" placeholder="Oxygen %" required min="60" max="100"
             class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" />
 
           <div class="flex gap-2">
@@ -181,8 +180,6 @@
       </div>
     </main>
   </div>
-
-
 
   <script type="module" src="./src/js/app.js"></script>
 </body>

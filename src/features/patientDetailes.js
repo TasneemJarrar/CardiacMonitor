@@ -1,4 +1,4 @@
-import { fetchData, getRole } from "../js/storage.js";
+import { fetchData, getItem, getRole } from "../js/storage.js";
 let allPatients = [];
 let allAppointments = [];
 
@@ -8,18 +8,17 @@ export async function initPatientDetailes() {
   const patientId = params.get("id");
   const role = getRole();
 
-  if (role === "receptionist") {
-    window.location.href = "./patientList.html";
-    return;
-  }
-
   main.innerHTML = `<p class="text-text-muted dark:text-text-muted-dark">Loading patient...</p>`;
 
   try {
-    [allPatients, allAppointments] = await Promise.all([
+    const [originalPatients, originalAppointments] = await Promise.all([
       fetchData("./src/data/patients.json"),
       fetchData("./src/data/appointments.json"),
     ]);
+
+    allPatients = getItem("patients")|| originalPatients;
+    allAppointments = getItem("appointments")|| originalAppointments;
+    
 
     const patient = allPatients.find((p) => p.id === patientId);
 
@@ -34,6 +33,7 @@ export async function initPatientDetailes() {
     renderPatientDetails(patient, appointments, role);
 
   } catch (err) {
+    console.log(err)
     main.innerHTML = `
         <div class="text-status-error dark:text-status-error-dark">
           <p>Failed to load patient data.</p>
@@ -82,24 +82,11 @@ function renderPatientDetails(patient, appointments, role) {
   `
       : "";
 
-  main.innerHTML = `
-    <a href="./patientList.html" class="text-sm text-primary hover:underline mb-4 inline-block">← Back to Patients</a>
 
-    <div class="bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-6 mb-6">
-      <div class="flex justify-between items-start">
-        <div>
-          <h1 class="text-2xl font-semibold">${patient.name}</h1>
-          <p class="text-sm text-text-muted dark:text-text-muted-dark mt-1">
-            Age: ${patient.age} - ${patient.gender}
-          </p>
-        </div>
-        <span class="text-xs px-3 py-1 rounded-full font-medium ${statusClass}">${patient.condition}</span>
-    </div>
-      ${clinicalDetails}
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-4 mb-6">
-      <div class="bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-5">
+      const vitalsDetails =
+    role === "doctor" || role === "nurse"
+      ? `
+    <div class="bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-5">
         <h3 class="font-semibold mb-3">Latest Vital Readings</h3>
         <div class="flex flex-col gap-2 text-sm">
           <div class="flex justify-between">
@@ -116,6 +103,38 @@ function renderPatientDetails(patient, appointments, role) {
           </div>
         </div>
       </div>
+  `
+      : "";
+
+  main.innerHTML = `
+    <a href="./patientList.html" class="text-sm text-primary hover:underline mb-4 inline-block">← Back to Patients</a>
+
+    <div class="bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-6 mb-6">
+      <div class="flex justify-between items-start">
+        <div>
+          <h1 class="text-2xl font-semibold">${patient.name}</h1>
+        </div>
+        <span class="text-xs px-3 py-1 rounded-full font-medium ${statusClass}">${patient.condition}</span>
+    </div>
+    <div class="grid grid-cols-3 gap-4 mt-4">
+      <div>
+        <p class="text-xs text-text-muted">Age</p>
+        <p class="text-sm font-medium">${patient.age}</p>
+      </div>
+      <div>
+        <p class="text-xs text-text-muted">Gender</p>
+        <p class="text-sm font-medium">${patient.gender}</p>
+      </div>
+      <div>
+        <p class="text-xs text-text-muted">Phone Number</p>
+        <p class="text-sm font-medium">${patient.phone}</p>
+      </div>
+    </div>
+      ${clinicalDetails}
+    </div>
+
+    <div class="grid ${vitalsDetails?"md:grid-cols-2":"md:grid-cols-1"} gap-4 mb-6">
+      ${vitalsDetails}
 
       <div class="bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-5">
         <h3 class="font-semibold mb-3">Appointments</h3>

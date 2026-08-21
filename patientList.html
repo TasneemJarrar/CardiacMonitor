@@ -58,7 +58,8 @@
           <span id="role" class="text-xs"></span>
         </div>
 
-        <button class="logoutBtn hidden w-10 h-10 md:flex justify-center items-center hover:bg-primary/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">
+        <button
+          class="logoutBtn hidden w-10 h-10 md:flex justify-center items-center hover:bg-primary/10 rounded-lg hover:scale-105 transition-all duration-200 ease-in-out">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <g fill="currentColor">
               <path
@@ -113,9 +114,9 @@
       <div class="mb-6">
         <h1 class="text-2xl font-semibold mb-3">Patients</h1>
         <div id="add-patient-form"
-          class=" bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-5 mb-4">
+          class="hidden bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-5 mb-4">
           <h3 class="font-semibold mb-3">Add New Patient</h3>
-          <form id="patient-form" class="grid grid-cols-2 md:grid-cols-4 gap-3 text-black dark:text-white">
+          <form id="rec-patient-form" class="grid grid-cols-2 md:grid-cols-4 gap-3 text-black dark:text-white">
             <input id="patient-name" type="text" placeholder="Full Name" required
               class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" />
 
@@ -131,8 +132,96 @@
 
             <input id="patient-phone" type="text" placeholder="Phone" required
               class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" />
+            <div class="flex gap-2 col-span-2 md:col-span-4">
+              <button type="submit"
+                class="bg-primary hover:bg-primary-dark text-white text-sm rounded-lg px-4 py-2 transition-colors">Save
+                Patient</button>
+            </div>
+          </form>
 
+          <p id="patient-form-message" class="text-xs mt-2 hidden"></p>
+        </div>
+
+        <div id="edit-patient-form"
+          class="hidden bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-5 mb-4">
+          <h3 class="font-semibold mb-3">Add New Patient</h3>
+
+          <form id="doc-patient-form" class="grid grid-cols-2 md:grid-cols-4 gap-3 text-black dark:text-white">
+            <select id="patient-select" required
+              class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm">
+              <option value="" disabled selected>Select Patient</option>
+            </select>
             <select id="patient-blood-type" required
+              class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm">
+              <option value="" disabled selected>Blood Type</option>
+              <option>A+</option>
+              <option>A-</option>
+              <option>B+</option>
+              <option>B-</option>
+              <option>O+</option>
+              <option>O-</option>
+              <option>AB+</option>
+              <option>AB-</option>
+            </select>
+
+            <select id="patient-condition" required
+              class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm">
+              <option value="" disabled selected>Condition</option>
+              <option value="Stable">Stable</option>
+              <option value="Needs Follow-up">Needs Follow-up</option>
+              <option value="Critical">Critical</option>
+            </select>
+
+            <input id="patient-diagnosis" type="text" placeholder="Diagnosis" required
+              class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" />
+
+            <input id="patient-heart-rate" type="number" placeholder="Heart Rate" required min="30" max="100"
+              class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" />
+
+            <input id="patient-blood-pressure" type="text" placeholder="120/80" required pattern="\d{2,3}/\d{2,3}"
+              class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" />
+
+            <input id="patient-oxygen" type="number" placeholder="Oxygen %" required min="60" max="100"
+              class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" />
+
+            <div class="flex gap-2">
+              <button type="submit"
+                class="flex-1 bg-primary hover:bg-primary-dark text-white text-sm rounded-lg px-3 py-2 transition-colors">Save</button>
+              <button type="button" id="cancel-btn"
+                class="text-sm text-text-muted hover:text-status-error transition-colors px-2">Cancel</button>
+            </div>
+          </form>
+          <p id="edit-patient-form-message" class="text-xs mt-2 hidden"></p>
+        </div>
+
+        <input id="patient-search" type="text" placeholder="Search by name..."
+          class="px-4 py-2 w-full rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm focus:outline-none focus:ring-2 focus:ring-primary text-text-muted dark:text-text-muted-dark" />
+      </div>
+
+      <div class="bg-surface dark:bg-surface-dark p-2 border border-border dark:border-border-dark rounded-lg">
+        <div id="patient-table-header"
+          class="hidden md:grid grid-cols-12 p-2 items-center text-sm border-b border-border last:border-0 dark:border-border-dark ">
+
+        </div>
+        <div id="patients-list" class="flex flex-col gap-2">
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="./src/js/app.js"></script>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+<!-- <select id="patient-blood-type" required
               class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm">
               <option value="" disabled selected>Blood Type</option>
               <option>A+</option>
@@ -163,30 +252,4 @@
               class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" />
 
             <input id="patient-oxygen" type="number" placeholder="Oxygen %" required min="50" max="100"
-              class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" />
-
-            <div class="flex gap-2 col-span-2 md:col-span-4">
-              <button type="submit"
-                class="bg-primary hover:bg-primary-dark text-white text-sm rounded-lg px-4 py-2 transition-colors">Save
-                Patient</button>
-            </div>
-          </form>
-
-          <p id="patient-form-message" class="text-xs mt-2 hidden"></p>
-        </div>
-
-        <input id="patient-search" type="text" placeholder="Search by name..."
-          class="px-4 py-2 w-full rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm focus:outline-none focus:ring-2 focus:ring-primary text-text-muted dark:text-text-muted-dark" />
-      </div>
-
-      <div id="patients-list" class="flex flex-col gap-2">
-      </div>
-    </main>
-  </div>
-
-  <script type="module" src="./src/js/app.js"></script>
-
-
-</body>
-
-</html>
+              class="px-3 py-2 rounded-lg border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-sm" /> -->

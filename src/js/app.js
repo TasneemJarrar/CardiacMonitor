@@ -1,5 +1,7 @@
 import { initAppointmentsList } from "../features/appointmentsList.js";
 import { initDoctorDashboard } from "../features/dashboardDoctor.js";
+import { initNurseDashboard } from "../features/dashboardNurse.js";
+import { initReceptionistDashboard } from "../features/dashboardReceptionist.js";
 import { renderHeader } from "../features/header.js";
 import { initPatientDetailes } from "../features/patientDetailes.js";
 import { initPatientsList } from "../features/patientList.js";
@@ -7,6 +9,7 @@ import { initReportsList } from "../features/reportsList.js";
 import { initRoleSelect } from "../features/roleSelect.js";
 import { bindSideBarToggle, renderSidebar } from "../features/sideBar.js";
 import { initVitalsList } from "../features/vitals.js";
+import { initNotifications } from "./notifications.js";
 import { getRole } from "./storage.js";
 import { bindThemeToggle, initTheme } from "./theme.js";
 
@@ -21,13 +24,23 @@ if (page === "role-select") {
 
 if (page === "dashboard") {
   bindThemeToggle();
-  renderHeader();
+  await renderHeader();
   renderSidebar();
   bindSideBarToggle();
+  initNotifications();
 
   const role = getRole();
   if (role === "doctor") {
     initDoctorDashboard();
+  }
+
+  if (role === "nurse") {
+    initNurseDashboard();
+  }
+
+  if (role === "receptionist") {
+    initReceptionistDashboard();
+    
   }
 }
 
@@ -37,6 +50,8 @@ if (page === "patients") {
   bindThemeToggle();
   bindSideBarToggle();
   initPatientsList();
+  initNotifications();
+
 }
 
 if (page === "vitals") {
@@ -45,6 +60,7 @@ if (page === "vitals") {
   bindThemeToggle();
   bindSideBarToggle();
   initVitalsList();
+  initNotifications();
 }
 
 if (page === "appointments") {
@@ -61,6 +77,7 @@ if (page === "patientDetailes") {
   bindThemeToggle();
   bindSideBarToggle();
   initPatientDetailes();
+  initNotifications();
 }
 
 if (page === "reports") {
@@ -69,4 +86,5 @@ if (page === "reports") {
   bindThemeToggle();
   bindSideBarToggle();
   initReportsList();
+  initNotifications();
 }

@@ -1,4 +1,5 @@
-import { fetchData, getRole } from "../js/storage.js";
+import { getCurrentUser, notifyOtherUsers } from "../js/notifications.js";
+import { fetchData, getItem, getRole, setItem } from "../js/storage.js";
 
 let allPatients = [];
 let activefilter = "all";
@@ -12,7 +13,9 @@ export async function initVitalsList() {
   VitalsContainer.innerHTML = `<p class="text-text-muted dark:text-text-muted-dark">Loading Vitals...</p>`;
 
   try {
-    allPatients = await fetchData("./src/data/patients.json");
+    const originalPatients = await fetchData("./src/data/patients.json");
+
+    allPatients = getItem("patients") || originalPatients;
 
     if (allPatients.length === 0) {
       VitalsContainer.innerHTML = `<p class="text-text-muted dark:text-text-muted-dark">No patients found.</p>`;
@@ -164,6 +167,12 @@ function initAddVitalForm() {
     showMessage(`Reading saved for ${patient.name}.`, "success");
 
     form.reset();
+    setItem("patients", allPatients);
+    const currentUser = getCurrentUser(role);
+    notifyOtherUsers(
+      `${patient.name}'s vital signs were updated successfully added by ${role}`,
+      currentUser.id,
+    );
     renderVitals(allPatients);
 
     setTimeout(() => {

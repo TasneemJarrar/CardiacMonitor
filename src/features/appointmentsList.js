@@ -1,4 +1,5 @@
-import { fetchData, getRole } from "../js/storage.js";
+import { getCurrentUser, notifyOtherUsers } from "../js/notifications.js";
+import { fetchData, getItem, getRole, setItem } from "../js/storage.js";
 
 let allPatients = [];
 let allAppointments = [];
@@ -16,11 +17,16 @@ export async function initAppointmentsList() {
   appointmentList.innerHTML = `<p class="text-text-muted dark:text-text-muted-dark">Loading Appointments...</p>`;
 
   try {
-    [allPatients, allAppointments, allUsers] = await Promise.all([
-      fetchData("./src/data/patients.json"),
-      fetchData("./src/data/appointments.json"),
-      fetchData("./src/data/users.json"),
-    ]);
+    const [originalPatients, originalAppointments, originalUsers] =
+      await Promise.all([
+        fetchData("./src/data/patients.json"),
+        fetchData("./src/data/appointments.json"),
+        fetchData("./src/data/users.json"),
+      ]);
+
+    allPatients = getItem("patients") || originalPatients;
+    allAppointments = getItem("appointments") || originalAppointments;
+    allUsers = getItem("users") || originalUsers;
 
     allDoctors = allUsers.filter((u) => u.role === "doctor");
 
@@ -50,7 +56,6 @@ export async function initAppointmentsList() {
     if (role === "receptionist") {
       initAppointmentForm();
     }
-
   } catch (err) {
     appointmentList.innerHTML = `
         <div class="text-status-error dark:text-status-error-dark">
@@ -81,7 +86,9 @@ function renderAppointments(appointments, role) {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-        const appointment = allAppointments.find((a) => a.id === btn.dataset.id);
+        const appointment = allAppointments.find(
+          (a) => a.id === btn.dataset.id,
+        );
         if (appointment) fillFormForEdit(appointment);
       });
     });
@@ -90,7 +97,9 @@ function renderAppointments(appointments, role) {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-        allAppointments = allAppointments.filter((a) => a.id !== btn.dataset.id);
+        allAppointments = allAppointments.filter(
+          (a) => a.id !== btn.dataset.id,
+        );
         renderAppointments(allAppointments, role);
       });
     });
@@ -106,7 +115,9 @@ function renderAppointments(appointments, role) {
 function renderAppointmentRow(a, role) {
   const patient = allPatients.find((p) => p.id === a.patientId);
   const patientName = patient ? patient.name : "unknown";
-  const doctor = allUsers.find((d) => d.id === a.doctorId && d.role === "doctor");
+  const doctor = allUsers.find(
+    (d) => d.id === a.doctorId && d.role === "doctor",
+  );
   const doctorName = doctor ? doctor.name : "unknown";
 
   const statusColors = {
@@ -116,7 +127,9 @@ function renderAppointmentRow(a, role) {
   };
   const statusClass = statusColors[a.status] || "";
 
-  const actionButtons = role === "receptionist" ? `
+  const actionButtons =
+    role === "receptionist"
+      ? `
     <div class="flex gap-1 col-span-3 justify-end">
       <button class="edit-btn text-xs text-primary hover:bg-primary/10 rounded-lg p-2" data-id="${a.id}">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -129,9 +142,13 @@ function renderAppointmentRow(a, role) {
 </svg>
       </button>
     </div>
-  ` : "";
+  `
+      : "";
 
-  const clickableClass = role !== "receptionist" ? "appointment-patient-row cursor-pointer hover:bg-background dark:hover:bg-background-dark" : "";
+  const clickableClass =
+    role !== "receptionist"
+      ? "appointment-patient-row cursor-pointer hover:bg-background dark:hover:bg-background-dark"
+      : "";
 
   return `
       <div
@@ -197,14 +214,19 @@ function initAppointmentForm() {
 
   if (!formDiv || !form) return;
 
-  patientSelect.innerHTML = `<option value="" disabled selected>Select Patient</option>` +
-    allPatients.map((p) => `<option value="${p.id}">${p.name}</option>`).join("");
+  patientSelect.innerHTML =
+    `<option value="" disabled selected>Select Patient</option>` +
+    allPatients
+      .map((p) => `<option value="${p.id}">${p.name}</option>`)
+      .join("");
 
-  doctorSelect.innerHTML = `<option value="" disabled selected>Select Doctor</option>` +
-    allDoctors.map((d) => `<option value="${d.id}">${d.name}</option>`).join("");
+  doctorSelect.innerHTML =
+    `<option value="" disabled selected>Select Doctor</option>` +
+    allDoctors
+      .map((d) => `<option value="${d.id}">${d.name}</option>`)
+      .join("");
 
-  formDiv.classList.remove("hidden"); // ظاهرة دايمًا للاستقبال، جاهزة للإضافة
-
+  formDiv.classList.remove("hidden");
   cancelBtn.addEventListener("click", () => {
     resetAppointmentForm();
   });
@@ -247,6 +269,13 @@ function initAppointmentForm() {
         reason,
       };
       allAppointments.push(newAppointment);
+      setItem("appointments", allAppointments);
+      const currentUser = getCurrentUser(role);
+      notifyOtherUsers(
+        `A new appointments was successfully added by ${role}`,
+        currentUser.id,
+      );
+
       showAppointmentMessage("Appointment added.", "success");
     }
 
@@ -270,7 +299,8 @@ function resetAppointmentForm() {
 }
 
 function fillFormForEdit(appointment) {
-  document.querySelector("#appointment-form-title").textContent = "Edit Appointment";
+  document.querySelector("#appointment-form-title").textContent =
+    "Edit Appointment";
   document.querySelector("#appointment-edit-id").value = appointment.id;
   document.querySelector("#appt-patient-select").value = appointment.patientId;
   document.querySelector("#appt-doctor-select").value = appointment.doctorId;
@@ -278,13 +308,16 @@ function fillFormForEdit(appointment) {
   document.querySelector("#appt-time").value = appointment.time;
   document.querySelector("#appt-status").value = appointment.status;
   document.querySelector("#appt-reason").value = appointment.reason;
-  document.querySelector("#add-appointment-form").scrollIntoView({ behavior: "smooth" });
+  document
+    .querySelector("#add-appointment-form")
+    .scrollIntoView({ behavior: "smooth" });
 }
 
 function showAppointmentMessage(text, type) {
   const message = document.querySelector("#appointment-form-message");
   message.textContent = text;
-  message.className = type === "success"
-    ? "text-xs mt-2 text-status-success"
-    : "text-xs mt-2 text-status-error";
+  message.className =
+    type === "success"
+      ? "text-xs mt-2 text-status-success"
+      : "text-xs mt-2 text-status-error";
 }

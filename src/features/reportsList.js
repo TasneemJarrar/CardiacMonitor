@@ -17,13 +17,13 @@ export async function initReportsList() {
   reportContent.innerHTML = `<p class="text-text-muted dark:text-text-muted-dark">Loading reports...</p>`;
 
   try {
-     const [patients, appointments] = await Promise.all([
+    const [patients, appointments] = await Promise.all([
       fetchData("./src/data/patients.json"),
       fetchData("./src/data/appointments.json"),
     ]);
 
-    allPatients = patients;
-    allAppointments = appointments;
+    allPatients = getItem("patients") || patients;
+    allAppointments = getItem("appointments") || appointments;
 
     if (allPatients.length === 0) {
       reportContent.innerHTML = `<p class="text-text-muted dark:text-text-muted-dark">No patients found.</p>`;
@@ -296,10 +296,8 @@ function applyFilters(allPatients, allAppointments, role) {
   const activefilter = document.querySelector("#condition-filter").value;
 
   let filtered = allPatients.filter((p) => p.name.toLowerCase().includes(term));
-  if ( activefilter !== "all") {
-    filtered = filtered.filter(
-      (p) => ( p.condition === activefilter)
-    );
+  if (activefilter !== "all") {
+    filtered = filtered.filter((p) => p.condition === activefilter);
   }
 
   renderReports(filtered, allAppointments, role);
